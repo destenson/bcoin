@@ -53,7 +53,7 @@ var started = 0;
 function startFromKey(value){
   if (value.length==64){
     var w = new bcoin.hd.PrivateKey()
-    w.fromSeed("5ad1fd622f79236309614c85c39b32b7999ef2ae175872e683c317db7375af5a")
+    w.fromSeed(value)
     var key = w.toJSON()
     return startEngine(key.xprivkey)
   }
@@ -121,17 +121,6 @@ function startEngine(value){
 
   /*
 
-  {"Salt":"HpYrU6xCem8jG26QVacXEt1XIrddGM4Eo4n3i1ISFTRY2g/jaDXj6WjNT2A4OUSKPMlvtWFA8eBIYNgvUFHfUg==","Iterations":64000,
-  "EncryptedKey":"X3Epvz6LA88yIKVM+hxxuQdO6dgpIBCFkPjS5lkljd+vSrJPqGkzz02M4/VVwFTfnaIpVLzQuy4+IxMB+t/QU0s74dPCgRO/4ov+ocP92dm8tNyluKYvXsRhYlTgkrfmJxGm+srUR0ve0SrMP4totA==",
-  "EncryptedWalletPassword":"gNyXBL3/dfLZmc/1kw9TM5f51HnEbqFakbrzrQqnOvo=","EncryptedIdentifier":"Uvxs+7/VuzWlp1S42pmUDpJ4PgDLE3Y0j8FBBaCqI69pkd5v+E7hlSqQxk/V4x2EE3IY7Ai3Tv0R1JR21wMzHg==","Version":"1.2"}
-
-   
-
-
-  //1QE8ByvStmhb62zKpKTKujc6FNRqC2RfFV
-  //WLTJqUYryqwPS4CKrBVMbMHYZCzhrBVnnezu
-  // var xkey = { "xprivkey" : "xprv9s21ZrQH143K2Q8H18WMuiUzhMGpgnWguWoXKpkSEKCNakiSAXV8RfgZwxKh6qU7WCckJGrHkEMxKVKqQC5R1zikyNS5oaQ2n1FcJumPBD3"};
-
   // pool.open().then(function() {
   //   return walletdb.open();
   // }).then(function() {
@@ -146,11 +135,6 @@ function startEngine(value){
   //   // console.html(myWallet);
   //   // console.html(myWallet.getAddress());
   // });
-
-
-  //xprv9s21ZrQH143K2bgLxDBR57jtCueuYYMYREehNPzZQvTKX49Z23MLYwJ6kCShgEz4vVsEf5FBptWAibyEatYDJMTKV8tTrRgFxsWTtRzKGoK 5KZ //1Pxt8ssYWSFSgcgZ4gHVqAe4SjZVAYxzAF
-  //xprv9s21ZrQH143K2Q8H18WMuiUzhMGpgnWguWoXKpkSEKCNakiSAXV8RfgZwxKh6qU7WCckJGrHkEMxKVKqQC5R1zikyNS5oaQ2n1FcJumPBD3 2tB //1QE8ByvStmhb62zKpKTKujc6FNRqC2RfFV
-  // REAL xprv9s21ZrQH143K2ZVuyZYuv8uFKcGYTsEWCb3cKV1FzQj45oqFiQts2gVZ4qfjfso3J74Snru1ZYAmarb8dHcDwtuWkoPJ6wr8vz269oQCrDp
 
   */
   pool.open().then(function() {

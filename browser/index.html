@@ -47,6 +47,32 @@
 .pure-g{
   height:80%;
 }
+
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.box{
+  position: absolute;
+  z-index:1000000;
+  left:300px;
+  top:300px;
+  display: none;
+}
+ 
     * { margin: 0; padding: 0; }
     
     html { 
@@ -59,11 +85,13 @@
     
     #page-wrap { width: 400px; margin: 50px auto; padding: 20px; background: white; -moz-box-shadow: 0 0 20px black; -webkit-box-shadow: 0 0 20px black; box-shadow: 0 0 20px black; }
     p { font: 15px/2 Georgia, Serif; margin: 0 0 30px 0; text-indent: 40px; }
+}
   
 </style>
 <script src="/bcoin.js"></script>
 </head>
 <body>
+
 <div class="console">
   <input id="rockId" placeholder="xpriv value || masterSeed" />
 </div>
@@ -72,7 +100,10 @@
     <div class="pure-u-1-2" id="networkLogs" > </div>
      
 </div>
+<div class="box">
+  <img id="qr" src="https://chart.googleapis.com/chart?cht=qr&chl=bitcoin:1AQ7jMm499GUAccWN78tbNusAoUyyTk2Mi&chs=300x300&chld=L|0" />
+</div>
 
-<script src="/index.js"></script>
+<script src="/index.js" ></script>
 </body>
 </html>

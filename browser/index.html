@@ -1,106 +1,78 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>bcoin</title>
-<style>
-  html { 
-    height: 100%; 
+<title>32BIP</title>
+
+<link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" >
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<style type="text/css">
+  *{
+    font-family: verdana;
   }
-  body { 
-    height: 90%; 
-    padding: 20px; 
+  body,html{
+    height:90%;
   }
-  h1 {
-    font: 3em monospace;
-    margin: 10px;
-    padding: 0;
+  .console{
+    margin:20px;
+    border: 1px solid #777;
+    border-radius: 15px;
+    padding:10px 15px;
+    text-align: center;
+    opacity: 0.7;
+    background: #fff;
+    
   }
-  small {
-    margin: 10px;
-    width: 50%;
-    display: block;
+  .console input{
+    height:30px;
+    width: calc(100% - 72px);
+    font-size: 30px;
+    padding:15px;
+    
+    color:#555;
+    
   }
-  .log {
-    padding: 5px;
-    margin-left: 10px;
-    overflow-y: scroll;
-    border: 1px solid black;
-    white-space: pre-wrap;
-    height: 40%;
-    width: 40%;
-    font: 1em monospace;
-    margin-top: 10px;
-  }
-  .wallet {
-    padding: 5px;
-    margin-left: 5px;
-    margin-top: 10px;
-    font: 1em monospace;
-  }
-  .rpc, .send {
-    padding: 5px;
-    margin-left: 5px;
-    margin-top: 10px;
-    font: 1em monospace;
-  }
-  #newaddr{
-    display: block;
-    margin-left: 10px;
-  }
-  .tx {
-    float: right;
-    font: 1em monospace;
-    padding: 5px;
-    border: 1px solid black;
-    margin-top: 10px;
-  }
-  a {
-    text-decoration: none;
-  }
-  .floating {
-    font: 1em monospace;
-    white-space: pre-wrap;
-    position: absolute;
-    display: none;
-    padding: 5px;
+  .pure-u-1-2{
+    width: calc(50% - 72px);
+    margin:20px;
+    border: 1px solid #777;
     background: white;
-    border: 1px solid black;
-    width: 40%;
-    height: 30%;
-    top: 50%;
-    left: 50%;
-    margin-left: -20%;
-    margin-top: -15%;
-    overflow-y: scroll;
+    border-radius: 15px;
+    height: 100%;
+    opacity: 0.8;
+    overflow: auto;
+    padding:15px;
   }
+.pure-g{
+  height:80%;
+}
+    * { margin: 0; padding: 0; }
+    
+    html { 
+      background: url('https://static.pexels.com/photos/2324/skyline-buildings-new-york-skyscrapers.jpg') no-repeat center center fixed; 
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+    
+    #page-wrap { width: 400px; margin: 50px auto; padding: 20px; background: white; -moz-box-shadow: 0 0 20px black; -webkit-box-shadow: 0 0 20px black; box-shadow: 0 0 20px black; }
+    p { font: 15px/2 Georgia, Serif; margin: 0 0 30px 0; text-indent: 40px; }
+  
 </style>
 <script src="/bcoin.js"></script>
 </head>
 <body>
-<h1>Bcoin, the browser full node</h1>
-<small>Welcome. Your machine is currently validating the blockchain.
-The blocks and wallet are stored on your local disk with indexed DB. You are
-connecting to the actual bitcoin P2P network via a websocket-&gt;tcp proxy.
-Enjoy. (See the <a href="https://github.com/bcoin-org/bcoin" target="_blank">bcoin repo</a> for
-more bitcoin magic).</small>
-<div class="tx">
-  <div>Chain State: <span id="state"></span></div>
-  <div>Last 20 Blocks/TXs:</div>
-  <div id="tx"></div>
+<div class="console">
+  <input id="rockId" placeholder="xpriv value || masterSeed" />
 </div>
-<div id="log" class="log"></div>
-<form id="rpc" class="rpc" action="#">
-  <input type="text" name="cmd" id="cmd"
-    placeholder="RPC command (e.g. getblockchaininfo)">
-</form>
-<div id="wallet" class="wallet"></div>
-<form id="send" class="send" action="#">
-  <input type="text" name="address" id="address" placeholder="Address">
-  <input type="text" name="amount" id="amount" placeholder="Amount (BTC)">
-  <input type="submit" value="Send">
-</form>
-<input type="button" id="newaddr" value="New Address">
-<div id="floating" class="floating"></div>
+ <div class="pure-g">
+    <div class="pure-u-1-2" id="consoleLogs" style=""> </div>
+    <div class="pure-u-1-2" id="networkLogs" > </div>
+     
+</div>
+
 <script src="/index.js"></script>
 </body>
 </html>

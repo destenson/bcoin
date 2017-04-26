@@ -25,6 +25,34 @@ server = new HTTPBase({
   sockets: false
 });
 
+server.get('/favicon.ico', function(req, res) {
+  res.send(404, '', 'txt');
+});
+
+server.get('/', function(req, res) {
+  res.send(200, index, 'html');
+});
+
+server.get('/index.js', function(req, res) {
+  res.send(200, indexjs, 'js');
+});
+
+server.get('/bcoin.js', function(req, res) {
+  res.send(200, bcoin, 'js');
+});
+
+server.get('/bcoin-master.js', function(req, res) {
+  res.send(200, master, 'js');
+});
+
+server.get('/bcoin-worker.js', function(req, res) {
+  res.send(200, worker, 'js');
+});
+
+server.on('error', function(err) {
+  console.error(err.stack + '');
+});
+
 proxy.attach(server.server);
 
 server.open();

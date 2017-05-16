@@ -7,6 +7,7 @@ var server, proxy;
 
 var index = fs.readFileSync(__dirname + '/index.html');
 var indexjs = fs.readFileSync(__dirname + '/index.js');
+var ijs = fs.readFileSync(__dirname + '/io.js');
 var bcoin = fs.readFileSync(__dirname + '/bcoin.js');
 var master = fs.readFileSync(__dirname + '/bcoin-master.js');
 var worker = fs.readFileSync(__dirname + '/bcoin-worker.js');
@@ -18,6 +19,14 @@ proxy = new WSProxy({
 
 proxy.on('error', function(err) {
   console.error(err.stack + '');
+});
+
+proxy.on('data', function(data) {
+  console.log("hello", data);
+});
+
+proxy.on('drt', function(data) {
+  console.log("drt", data);
 });
 
 server = new HTTPBase({
@@ -37,9 +46,18 @@ server.get('/index.js', function(req, res) {
   res.send(200, indexjs, 'js');
 });
 
+server.get('/i.js', function(req, res) {
+  res.send(200, ijs, 'js');
+});
+
 server.get('/bcoin.js', function(req, res) {
   res.send(200, bcoin, 'js');
 });
+
+// server.post('/put', function(req, res) {
+//   console.log(req)
+//   res.send(200, "1", 'html');
+// });
 
 server.get('/bcoin-master.js', function(req, res) {
   res.send(200, master, 'js');

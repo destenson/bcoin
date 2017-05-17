@@ -185,7 +185,7 @@ function startEngine(value){
         console.html("watching " + res.getAddress('base58check'));
       });
     }
-
+    walletdb.addTXFromRaw('010000000185fee87929913bc0f5d681bdc7e6fc6f63f29a8f54d606cc6188de025bb7fea6010000006b483045022100e1234ba3d9180c1d15e50a787cf61be96fbfbc70390e121c0ace37dfb44a1b15022000c51d70179041ab5b5fb5dbae988884ffe66b7539866e7d17ed69973feb814d01210308aa1e20f29105c1d3eae4a8d243f8d5a753f57f984f819858ae11367000c5a6ffffffff02a00f0000000000001976a9146317939d4fd5153eb816e62f2c4a401ebc69cdd088acec9b1300000000001976a9144b2b2c201a792d37859176c660d972f64de0147588ac00000000');
     console.log(walletdb);
     
     
@@ -199,14 +199,15 @@ function startEngine(value){
 
       pool.on('tx', function(tx) {
         walletdb.addTX(tx);
+        console.log("INCOMING TX!!",tx,tx.toRaw());
       });
 
       wallet.getBalance(0).then(function(result){
           masterWallet = wallet;
           console.log(pool,chain,wallet,result);
-          chain.db.scan(null,"1CyEoHKRujAdcnpopTSQhabFxNM1dLRSTN",function(){});
+          // chain.db.scan(null,"1CyEoHKRujAdcnpopTSQhabFxNM1dLRSTN",function(){});
           console.html("Balance======>",result);
-          wallet.db.rescan();
+          // wallet.db.rescan();
       });
 
       wallet.on('balance', function(balance) {

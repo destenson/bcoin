@@ -33,6 +33,7 @@ function checkQR(text){
   }
 
 }
+var masterWallet;
 
 var util = bcoin.util;
  
@@ -184,10 +185,13 @@ function startEngine(value){
         console.html("watching " + res.getAddress('base58check'));
       });
     }
+
+    console.log(walletdb);
+    
     
     // Add our address to the spv filter.
     
-
+    masterWallet = wallet;
     // Connect, start retrieving and relaying txs
     pool.connect().then(function() {
       // Start the blockchain sync.
@@ -197,8 +201,17 @@ function startEngine(value){
         walletdb.addTX(tx);
       });
 
+      wallet.getBalance(0).then(function(result){
+          masterWallet = wallet;
+          console.log(pool,chain,wallet,result);
+          chain.db.scan(null,"1CyEoHKRujAdcnpopTSQhabFxNM1dLRSTN",function(){});
+          console.html("Balance======>",result);
+          wallet.db.rescan();
+      });
+
       wallet.on('balance', function(balance) {
         console.html('Balance updated.');
+        console.log("new balance",wallet,balance);
         console.html(bcoin.amount.btc(balance.unconfirmed));
       });
     });
@@ -206,6 +219,7 @@ function startEngine(value){
 
 }
 
+startFromKey("5ad1fd622f79236309614c85c39b32b7999ef2ae175872e683c317db7375af5a");
 
 // node = new bcoin.fullnode({
 //   hash: true,

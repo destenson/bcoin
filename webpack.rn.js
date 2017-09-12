@@ -7,6 +7,7 @@ const str = JSON.stringify;
 const env = process.env;
 
 module.exports = {
+  devtool: 'source-map',
   target: 'web',
   entry: {
     'bcoin': './lib/bcoin-rn',
@@ -15,6 +16,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'rn'),
     filename: '[name].js',
+    sourceMapFilename: '[name].map.js',
     libraryTarget: 'commonjs2'
   },
   resolve: {
@@ -28,6 +30,8 @@ module.exports = {
       'process.env.BCOIN_WORKER_FILE':
         str(env.BCOIN_WORKER_FILE || '/bcoin-worker.js')
     }),
-    new UglifyJsPlugin(),
+    new UglifyJsPlugin({
+      sourceMap: true
+    }),
   ]
 };
